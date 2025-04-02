@@ -1,20 +1,8 @@
 [
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++   -g -arch arm64 -o CMakeFiles/CAM.dir/main.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/main.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/include/opencascade -std=gnu++11 -arch arm64 -o CMakeFiles/CAM.dir/main.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/main.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/main.cpp",
   "output": "CMakeFiles/CAM.dir/main.cpp.o"
-},
-{
-  "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++   -g -arch arm64 -o CMakeFiles/CAM.dir/geometry_utils.hpp/.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/geometry_utils.hpp/.cpp",
-  "file": "/Users/gracegerwe/Documents/GitHub/cam/geometry_utils.hpp/.cpp",
-  "output": "CMakeFiles/CAM.dir/geometry_utils.hpp/.cpp.o"
-},
-{
-  "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++   -g -arch arm64 -o CMakeFiles/CAM.dir/hello.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/hello.cpp",
-  "file": "/Users/gracegerwe/Documents/GitHub/cam/hello.cpp",
-  "output": "CMakeFiles/CAM.dir/hello.cpp.o"
 }
 ]
