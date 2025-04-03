@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json" FORCE)
 
 set(OCCT_DIR "$ENV{HOME}/occt-install")
-include_directories("${OCCT_DIR}/include")
+include_directories("${OCCT_DIR}/include/opencascade")
 link_directories("${OCCT_DIR}/lib")
 
 add_executable(CAM geometry_utils.cpp main.cpp step_test.cpp)
