@@ -1,22 +1,37 @@
 cmake_minimum_required(VERSION 3.10)
 project(CAM)
 
-# Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-# Generate compile_commands.json for VS Code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json" FORCE)
 
-# Set OpenCascade paths directly
-set(OC_INCLUDE_DIRS "/opt/homebrew/include/opencascade")
-file(GLOB OC_LIBRARIES "/opt/homebrew/lib/libTK*.dylib")
+set(OCCT_DIR "$ENV{HOME}/occt-install")
+include_directories("${OCCT_DIR}/include")
+link_directories("${OCCT_DIR}/lib")
 
-# Include directories
-include_directories(${OC_INCLUDE_DIRS})
+add_executable(CAM geometry_utils.cpp main.cpp step_test.cpp)
 
-# Add source files
-add_executable(CAM main.cpp)
-
-# Link OpenCascade libraries
-target_link_libraries(CAM PRIVATE ${OC_LIBRARIES})
+target_link_libraries(CAM
+    TKernel
+    TKMath
+    TKG2d
+    TKG3d
+    TKBRep
+    TKGeomBase
+    TKGeomAlgo
+    TKTopAlgo
+    TKPrim
+    TKShHealing
+    TKBool
+    TKFillet
+    TKFeat
+    TKOffset
+    TKMesh
+    TKSTEP
+    TKSTEPAttr
+    TKSTEPBase
+    TKXSBase
+    TKDE
+    TKExpress
+)
