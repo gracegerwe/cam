@@ -1,5 +1,9 @@
 #include "geometry_utils.hpp"
 
+#include <BRepAdaptor_Surface.hxx>
+#include <BRep_Tool.hxx>
+#include <Geom_CylindricalSurface.hxx>
+#include <Geom_Plane.hxx>
 #include <STEPControl_Reader.hxx>
 #include <TopAbs_ShapeEnum.hxx>
 #include <TopExp.hxx>
@@ -10,6 +14,7 @@
 #include <TopoDS_Shell.hxx>
 #include <TopoDS_Solid.hxx>
 #include <TopoDS_Vertex.hxx>
+#include <gp_Pln.hxx>
 #include <iostream>
 
 TopoDS_Shape loadStepFile(const std::string& filename) {
