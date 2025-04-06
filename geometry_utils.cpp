@@ -104,3 +104,37 @@ std::vector<Feature> extractFeatures(const TopoDS_Shape& shape) {
 
   return features;
 }
+
+std::vector<CamOperation> generateCamOps(const std::vector<Feature>& features) {
+  std::vector<CamOperation> ops;
+
+  for (const auto& feat : features) {
+    CamOperation op;
+    op.position = feat.location;
+
+    if (feat.type == "cylindrical_hole") {
+      op.type = "drill";
+      op.tool = "twist_drill_5mm";
+      op.depth = 10.0;  // TODO: derive from geometry if possible
+      op.feedRate = 200.0;
+      op.spindleSpeed = 3000.0;
+    } else if (feat.type == "flat_face") {
+      op.type = "mill";
+      op.tool = "flat_endmill_6mm";
+      op.depth = 1.0;
+      op.feedRate = 300.0;
+      op.spindleSpeed = 5000.0;
+    } else {
+      op.type = "unknown";
+      op.tool = "none";
+      op.depth = 0.0;
+      op.feedRate = 0.0;
+      op.spindleSpeed = 0.0;
+      continue;
+    }
+
+    ops.push_back(op);
+  }
+
+  return ops;
+}
