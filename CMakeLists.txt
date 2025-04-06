@@ -10,7 +10,7 @@ set(OCCT_DIR "$ENV{HOME}/occt-install")
 include_directories("${OCCT_DIR}/include/opencascade")
 link_directories("${OCCT_DIR}/lib")
 
-add_executable(CAM geometry_utils.cpp main.cpp step_test.cpp)
+add_executable(CAM geometry_utils.cpp main.cpp)
 
 target_link_libraries(CAM
     TKernel
@@ -28,10 +28,13 @@ target_link_libraries(CAM
     TKFeat
     TKOffset
     TKMesh
-    TKSTEP
-    TKSTEPAttr
-    TKSTEPBase
+
+    # Replace the old STEP libraries with the new ones
+    TKDESTEP # Instead of TKSTEPAttr and TKSTEPBase
     TKXSBase
     TKDE
     TKExpress
+
+    # You might also need these depending on your code
+    TKXSDRAWSTEP
 )

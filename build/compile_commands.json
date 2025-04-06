@@ -10,11 +10,5 @@
   "command": "/usr/bin/clang++  -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/CAM.dir/main.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/main.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/main.cpp",
   "output": "CMakeFiles/CAM.dir/main.cpp.o"
-},
-{
-  "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++  -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/CAM.dir/step_test.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/step_test.cpp",
-  "file": "/Users/gracegerwe/Documents/GitHub/cam/step_test.cpp",
-  "output": "CMakeFiles/CAM.dir/step_test.cpp.o"
 }
 ]
