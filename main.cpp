@@ -13,5 +13,14 @@ int main() {
   }
 
   printShapeStats(shape);
+
+  auto features = extractFeatures(shape);
+
+  for (const auto& feat : features) {
+    std::cout << feat.type << " at (" << feat.location.X() << ", "
+              << feat.location.Y() << ", " << feat.location.Z() << ") -> "
+              << feat.classification << std::endl;
+  }
+
   return 0;
 }
