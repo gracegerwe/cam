@@ -1,6 +1,8 @@
 #include "main_window.hpp"
 
+#include <QOpenGLWidget>
 #include <QPushButton>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -23,7 +25,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setCentralWidget(central);
   setWindowTitle("DFM Visualizer");
 
-  viewer->loadSTEP("/Users/gracegerwe/Downloads/Servo_Horn.step");
+  // ✅ Delay loadSTEP until OpenGL context is ready
+  QTimer::singleShot(0, this, [this]() {
+    viewer->loadSTEP("/Users/gracegerwe/Downloads/Servo_Horn.step");
+  });
 }
 
 MainWindow::~MainWindow() = default;

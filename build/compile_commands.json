@@ -1,37 +1,49 @@
 [
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++  -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/cam_cli.dir/src/main_cli.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_cli.cpp",
+  "command": "/usr/bin/clang++  -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_cli_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/cam_cli.dir/cam_cli_autogen/mocs_compilation.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/build/cam_cli_autogen/mocs_compilation.cpp",
+  "file": "/Users/gracegerwe/Documents/GitHub/cam/build/cam_cli_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/cam_cli.dir/cam_cli_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
+  "command": "/usr/bin/clang++  -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_cli_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/cam_cli.dir/src/main_cli.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_cli.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/main_cli.cpp",
   "output": "CMakeFiles/cam_cli.dir/src/main_cli.cpp.o"
 },
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++  -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/cam_cli.dir/src/geometry_utils.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
+  "command": "/usr/bin/clang++  -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_cli_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -g -std=gnu++11 -arch arm64 -o CMakeFiles/cam_cli.dir/src/geometry_utils.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
   "output": "CMakeFiles/cam_cli.dir/src/geometry_utils.cpp.o"
 },
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/main_gui.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_gui.cpp",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -isystem /opt/homebrew/opt/qt/lib/QtOpenGLWidgets.framework/Headers -iframework /opt/homebrew/opt/qt/lib -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/cam_gui_autogen/mocs_compilation.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/mocs_compilation.cpp",
+  "file": "/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/cam_gui.dir/cam_gui_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -isystem /opt/homebrew/opt/qt/lib/QtOpenGLWidgets.framework/Headers -iframework /opt/homebrew/opt/qt/lib -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/main_gui.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_gui.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/main_gui.cpp",
   "output": "CMakeFiles/cam_gui.dir/src/main_gui.cpp.o"
 },
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/main_window.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_window.cpp",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -isystem /opt/homebrew/opt/qt/lib/QtOpenGLWidgets.framework/Headers -iframework /opt/homebrew/opt/qt/lib -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/main_window.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/main_window.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/main_window.cpp",
   "output": "CMakeFiles/cam_gui.dir/src/main_window.cpp.o"
 },
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/viewer/OCCTWidget.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/viewer/OCCTWidget.cpp",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -isystem /opt/homebrew/opt/qt/lib/QtOpenGLWidgets.framework/Headers -iframework /opt/homebrew/opt/qt/lib -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/viewer/OCCTWidget.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/viewer/OCCTWidget.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/viewer/OCCTWidget.cpp",
   "output": "CMakeFiles/cam_gui.dir/src/viewer/OCCTWidget.cpp.o"
 },
 {
   "directory": "/Users/gracegerwe/Documents/GitHub/cam/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/geometry_utils.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -I/Users/gracegerwe/Documents/GitHub/cam/build/cam_gui_autogen/include -I/Users/gracegerwe/occt-install/include/opencascade -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/opt/qt/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/opt/qt/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -isystem /opt/homebrew/lib/QtOpenGL.framework/Headers -isystem /opt/homebrew/opt/qt/lib/QtOpenGLWidgets.framework/Headers -iframework /opt/homebrew/opt/qt/lib -g -std=gnu++17 -arch arm64 -o CMakeFiles/cam_gui.dir/src/geometry_utils.cpp.o -c /Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
   "file": "/Users/gracegerwe/Documents/GitHub/cam/src/geometry_utils.cpp",
   "output": "CMakeFiles/cam_gui.dir/src/geometry_utils.cpp.o"
 }

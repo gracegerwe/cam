@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(CAM)
 
+# Enable Qt's meta-object compiler for signals/slots
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
@@ -16,7 +21,6 @@ add_executable(cam_cli
     src/geometry_utils.cpp
 )
 
-# GUI App
 add_executable(cam_gui
     src/main_gui.cpp
     src/main_window.cpp
@@ -49,11 +53,18 @@ target_link_libraries(cam_cli
 )
 
 # GUI (adds Qt6 too)
-find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL)
+set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt/lib/cmake")
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL OpenGLWidgets)
 
 target_link_libraries(cam_gui
     Qt6::Widgets
     Qt6::OpenGL
+    Qt6::OpenGLWidgets
+    TKV3d
+    TKOpenGl
+    TKService
+    TKOpenGl
     TKernel
     TKMath
     TKG2d
