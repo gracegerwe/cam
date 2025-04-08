@@ -1,14 +1,7 @@
 #pragma once
-
-// Qt includes
-// #include <QWidget>
-
-// OpenCascade includes
 #include <AIS_InteractiveContext.hxx>
 #include <AIS_Shape.hxx>
 #include <QOpenGLWidget>
-// #include <Aspect_DisplayConnection.hxx>
-// #include <Aspect_Window.hxx>
 #include <TopoDS_Shape.hxx>
 #include <V3d_View.hxx>
 
@@ -32,5 +25,7 @@ class OCCTWidget : public QOpenGLWidget {
   Handle(V3d_View) view;
   Handle(AIS_InteractiveContext) context;
   Handle(AIS_Shape) displayedShape;
+  Handle(V3d_Viewer) viewer;
   TopoDS_Shape currentShape;
+  bool isInitialized = false;
 };

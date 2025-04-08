@@ -27,7 +27,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   // ✅ Delay loadSTEP until OpenGL context is ready
   QTimer::singleShot(0, this, [this]() {
+    qDebug() << "📦 Triggering loadSTEP from MainWindow";
     viewer->loadSTEP("/Users/gracegerwe/Downloads/Servo_Horn.step");
+  });
+
+  // ✅ Delay additional redraw AFTER widget is shown on screen
+  QTimer::singleShot(100, viewer, [this]() {
+    qDebug() << "🔁 Forcing post-show repaint";
+    viewer->update();   // schedule paintGL
+    viewer->repaint();  // force immediate paintGL
   });
 }
 

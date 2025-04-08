@@ -1,67 +1,123 @@
 #include "OCCTWidget.hpp"
 
-// #include <AppKit/NSView.h>
-// #include <Cocoa/Cocoa.h>
-// #include <Cocoa_Window.hxx>
-
 #include <AIS_Shape.hxx>
 #include <Aspect_DisplayConnection.hxx>
-// #include <Aspect_Window.hxx>
 #include <Aspect_NeutralWindow.hxx>
 #include <BRepMesh_IncrementalMesh.hxx>
+#include <Font_FontAspect.hxx>
+#include <Font_FontMgr.hxx>
 #include <Graphic3d_GraphicDriver.hxx>
 #include <OpenGl_GraphicDriver.hxx>
+#include <QApplication>
+#include <QElapsedTimer>
+#include <QOpenGLContext>
 #include <QResizeEvent>
 #include <STEPControl_Reader.hxx>
 
 OCCTWidget::OCCTWidget(QWidget *parent) : QOpenGLWidget(parent) {
   setFocusPolicy(Qt::StrongFocus);
-  setUpdateBehavior(QOpenGLWidget::PartialUpdate);
-  setAttribute(Qt::WA_NativeWindow);
-  setAttribute(Qt::WA_PaintOnScreen, false);
+  setUpdateBehavior(QOpenGLWidget::NoPartialUpdate);
+  // setAttribute(Qt::WA_NativeWindow);
+  // setAttribute(Qt::WA_PaintOnScreen, false);
   setAutoFillBackground(false);
+  setMinimumSize(400, 400);
 }
 
 OCCTWidget::~OCCTWidget() = default;
 
-// this->setAttribute(
-// Qt::WA_NativeWindow);  // Ensure native window ID is created
 void OCCTWidget::initializeGL() {
+  qDebug() << "🌱 initializeGL()";
+  makeCurrent();
+
+  qDebug() << "✅ OpenGL context is valid:"
+           << QOpenGLContext::currentContext()->isValid();
+
+  Handle(Font_FontMgr) fontMgr = Font_FontMgr::GetInstance();
+  qDebug() << "🖋 Font manager acquired:" << !fontMgr.IsNull();
   Handle(Aspect_DisplayConnection) disp = new Aspect_DisplayConnection();
   Handle(Graphic3d_GraphicDriver) driver = new OpenGl_GraphicDriver(disp);
-  Handle(V3d_Viewer) viewer = new V3d_Viewer(driver);
-  context = new AIS_InteractiveContext(viewer);
 
+  Handle(OpenGl_GraphicDriver) glDriver =
+      Handle(OpenGl_GraphicDriver)::DownCast(driver);
+  if (!glDriver.IsNull()) {
+    glDriver->ChangeOptions().contextDebug = Standard_True;
+    qDebug() << "🧠 OpenGL debug context enabled";
+  }
+
+  viewer = new V3d_Viewer(driver);
+  viewer->SetDefaultLights();
+  viewer->SetLightOn();
+  context = new AIS_InteractiveContext(viewer);
   view = viewer->CreateView();
-  // view->SetWindow(new Aspect_WindowNative((Aspect_Handle)this->winId()));
-  //  Handle(Cocoa_Window) window = new Cocoa_Window(disp, (NSView
-  //  *)this->winId()); hi grace try this
-  //  Handle(Aspect_DisplayConnection) disp;
-  //  Handle(Cocoa_Window) window = new Cocoa_Window((NSView *)this->winId());
-  //  view->SetWindow(window);
-  // view->SetWindow(Handle(Aspect_Window)());
+  qDebug() << "🎥 View and context created";
 
   Handle(Aspect_NeutralWindow) window = new Aspect_NeutralWindow();
   window->SetSize(this->width(), this->height());
   window->SetNativeHandle((Aspect_Drawable)this->winId());
+
+  if (!view->Window().IsNull()) {
+    view->Window()->DoResize();
+  }
   view->SetWindow(window);
+
+  qDebug() << "🪟 SetNativeHandle success";
 
   view->SetBackgroundColor(Quantity_NOC_WHITE);
   view->MustBeResized();
   view->TriedronDisplay(Aspect_TOTP_RIGHT_LOWER, Quantity_NOC_GRAY, 0.1,
                         V3d_ZBUFFER);
-}
 
-void OCCTWidget::resizeGL(int w, int h) {
-  if (!view.IsNull()) {
-    view->Window()->DoResize();
-    view->MustBeResized();
-  }
+  qDebug() << "✅ OpenGL context is valid:"
+           << QOpenGLContext::currentContext()->isValid();
+  qDebug() << "🧽 Finished initializeGL";
+  update();
+  repaint();
+  QApplication::processEvents();
 }
 
 void OCCTWidget::paintGL() {
+  QElapsedTimer timer;
+  timer.start();
+  qDebug() << "🎨 paintGL()";
+  makeCurrent();
+
+  if (view.IsNull()) {
+    qDebug() << "❌ View is null in paintGL";
+    return;
+  }
+
+  if (!isInitialized) {
+    view->Window()->DoResize();
+    view->MustBeResized();
+    // context->UpdateCurrentViewer();  //where is the def of this function
+    isInitialized = true;
+  }
+  qDebug() << "🖼 Redrawing view";
+  // view->Invalidate();
+  view->Redraw();
+
+  qint64 elapsed = timer.elapsed();
+  qDebug() << "⏱️ paintGL() took" << elapsed << "ms";
+
+  // just a guess but this might be an issue, not sure but it smells funny
+  // Force OpenGL buffer swap to actually show it ???? yeah idk seems odd
+  // if (auto *ctx = QOpenGLContext::currentContext()) {
+  // ctx->swapBuffers(ctx->surface());
+  // qDebug() << "🔁 Forced buffer swap";
+  //}
+}
+
+void OCCTWidget::resizeGL(int w, int h) {
+  // double chck that this isnt firing over and over
   if (!view.IsNull()) {
-    view->Redraw();
+    Handle(Aspect_NeutralWindow) neutralWindow =
+        Handle(Aspect_NeutralWindow)::DownCast(view->Window());
+    if (!neutralWindow.IsNull()) {
+      neutralWindow->SetSize(w, h);
+    }
+    view->Window()->DoResize();
+    view->MustBeResized();
+    update();
   }
 }
 
@@ -72,8 +128,12 @@ void OCCTWidget::loadSTEP(const std::string &path) {
   currentShape = reader.OneShape();
 
   displayedShape = new AIS_Shape(currentShape);
+  qDebug() << "📐 STEP shape is null?" << currentShape.IsNull();
   context->Display(displayedShape, Standard_True);
   view->FitAll();
+  view->Redraw();
+  update();
+  repaint();
 }
 
 void OCCTWidget::meshShape() {
@@ -81,12 +141,6 @@ void OCCTWidget::meshShape() {
   BRepMesh_IncrementalMesh mesh(currentShape, 0.1);
   if (!displayedShape.IsNull()) context->Redisplay(displayedShape, true);
   view->Redraw();
+  update();
+  repaint();
 }
-
-/*void OCCTWidget::paintEvent(QPaintEvent *) {
-  if (!view.IsNull()) view->Redraw();
-}
-
-void OCCTWidget::resizeEvent(QResizeEvent *) {
-  if (!view.IsNull()) view->MustBeResized();
-}*/

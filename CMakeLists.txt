@@ -50,6 +50,7 @@ target_link_libraries(cam_cli
     TKDE
     TKExpress
     TKXSDRAWSTEP
+    TKXSDRAW
 )
 
 # GUI (adds Qt6 too)
@@ -85,4 +86,5 @@ target_link_libraries(cam_gui
     TKDE
     TKExpress
     TKXSDRAWSTEP
+    TKXSDRAW
 )
