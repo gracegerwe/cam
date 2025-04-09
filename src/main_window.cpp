@@ -1,5 +1,6 @@
 #include "main_window.hpp"
 
+#include <QLabel>
 #include <QOpenGLWidget>
 #include <QPushButton>
 #include <QTimer>

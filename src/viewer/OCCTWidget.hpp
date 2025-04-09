@@ -2,6 +2,7 @@
 #include <AIS_InteractiveContext.hxx>
 #include <AIS_Shape.hxx>
 #include <QOpenGLWidget>
+#include <QTimer>
 #include <TopoDS_Shape.hxx>
 #include <V3d_View.hxx>
 
@@ -28,4 +29,5 @@ class OCCTWidget : public QOpenGLWidget {
   Handle(V3d_Viewer) viewer;
   TopoDS_Shape currentShape;
   bool isInitialized = false;
+  QTimer *frameTimer;
 };

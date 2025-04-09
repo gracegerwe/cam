@@ -7,6 +7,7 @@
 #include <Font_FontAspect.hxx>
 #include <Font_FontMgr.hxx>
 #include <Graphic3d_GraphicDriver.hxx>
+#include <Graphic3d_Vec2.hxx>
 #include <OpenGl_GraphicDriver.hxx>
 #include <QApplication>
 #include <QElapsedTimer>
@@ -21,6 +22,11 @@ OCCTWidget::OCCTWidget(QWidget *parent) : QOpenGLWidget(parent) {
   // setAttribute(Qt::WA_PaintOnScreen, false);
   setAutoFillBackground(false);
   setMinimumSize(400, 400);
+
+  frameTimer = new QTimer(this);
+  connect(frameTimer, &QTimer::timeout, this,
+          QOverload<>::of(&OCCTWidget::update));
+  frameTimer->start(16);
 }
 
 OCCTWidget::~OCCTWidget() = default;
@@ -63,6 +69,7 @@ void OCCTWidget::initializeGL() {
   qDebug() << "🪟 SetNativeHandle success";
 
   view->SetBackgroundColor(Quantity_NOC_WHITE);
+  view->SetImmediateUpdate(Standard_True);
   view->MustBeResized();
   view->TriedronDisplay(Aspect_TOTP_RIGHT_LOWER, Quantity_NOC_GRAY, 0.1,
                         V3d_ZBUFFER);
@@ -79,7 +86,7 @@ void OCCTWidget::paintGL() {
   QElapsedTimer timer;
   timer.start();
   qDebug() << "🎨 paintGL()";
-  makeCurrent();
+  // makeCurrent();
 
   if (view.IsNull()) {
     qDebug() << "❌ View is null in paintGL";
@@ -87,7 +94,7 @@ void OCCTWidget::paintGL() {
   }
 
   if (!isInitialized) {
-    view->Window()->DoResize();
+    view->SetSize(Graphic3d::Vec2i(w, h));
     view->MustBeResized();
     // context->UpdateCurrentViewer();  //where is the def of this function
     isInitialized = true;
@@ -95,30 +102,25 @@ void OCCTWidget::paintGL() {
   qDebug() << "🖼 Redrawing view";
   // view->Invalidate();
   view->Redraw();
-
+  update();
   qint64 elapsed = timer.elapsed();
   qDebug() << "⏱️ paintGL() took" << elapsed << "ms";
-
-  // just a guess but this might be an issue, not sure but it smells funny
-  // Force OpenGL buffer swap to actually show it ???? yeah idk seems odd
-  // if (auto *ctx = QOpenGLContext::currentContext()) {
-  // ctx->swapBuffers(ctx->surface());
-  // qDebug() << "🔁 Forced buffer swap";
-  //}
 }
 
 void OCCTWidget::resizeGL(int w, int h) {
   // double chck that this isnt firing over and over
+  qDebug() << "resizeGL function fires";
   if (!view.IsNull()) {
+    // view->SetSize({w, h});
     Handle(Aspect_NeutralWindow) neutralWindow =
         Handle(Aspect_NeutralWindow)::DownCast(view->Window());
     if (!neutralWindow.IsNull()) {
       neutralWindow->SetSize(w, h);
     }
-    view->Window()->DoResize();
-    view->MustBeResized();
-    update();
   }
+  view->Window()->DoResize();
+  view->MustBeResized();
+  update();
 }
 
 void OCCTWidget::loadSTEP(const std::string &path) {
